@@ -27,8 +27,8 @@ body {
 
 .bubble {
     border-radius: 50%;
+    margin: auto;
 }
-
 
 .album {
     min-height: 50rem; /* Can be removed; just added for demo purposes */
@@ -71,7 +71,3 @@ footer p {
 .c-4-color { background: blue; }
 .c-5-color { background: purple; }
 
-.smile {
-    content: "yygbbb";
-    font-size: 20px;
-}
