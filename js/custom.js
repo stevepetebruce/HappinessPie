@@ -6,10 +6,10 @@
         return;
     }
 
-    const pies = [];
+    const pies = JSON.parse(localStorage.getItem('pies')) || [];;
     const slider = document.querySelector('#slider-color');
     const createPies = document.querySelector('.add-pies');
-    const piesList = document.querySelector('.pies-list');
+    const piesList = document.querySelector('.card-list');
 
     noUiSlider.create(slider, {
         start: [ 20, 40, 60, 80 ],
@@ -33,7 +33,8 @@
         connect[i].classList.add(classes[i]);
     }
 
-    populateList(pies, piesList);
+
+
 
 
 
@@ -94,25 +95,38 @@
         if(newDate !== lastDate) {
             pies.push(pie);
         } else {
-            alert('Already entered today');
+            const alertMsg = `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>Sorry.</strong> You have already made an entry today. Please try again tomorrow.
+                </div>`;
+            console.log(alertMsg);
+
+            document.querySelector('.alert').innerHTML = alertMsg;
         }
         localStorage.setItem("pies", JSON.stringify(pies));
         populateList(pies, piesList);
         slider.noUiSlider.reset();
     }
 
-    createPies.addEventListener('submit', createPie);
 
 
 
-    function populateList(pies = [], piesList){
-        piesList.innerHTML =  pies.map((pie, i) => {
-            return`<div class="card">
+    function populateList(cards, cardList){
+        cardList.innerHTML =  cards.map((pie, i) => {
+                return`<div class="card">
                        <img data-src="holder.js/100px280/thumb" alt="Card image cap">
                        <p class="card-text" id="result">Date Created: ${pie.date}</p>
                    </div>`;
-        });
+        }).join('');
     }
+
+
+    createPies.addEventListener('submit', createPie);
+
+    populateList(pies, piesList);
+
 
 
 }(this, this.document));
