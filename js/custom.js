@@ -6,10 +6,11 @@
         return;
     }
 
-    const pies = JSON.parse(localStorage.getItem('pies')) || [];;
+    let pies = JSON.parse(localStorage.getItem('pies')) || [];
     const slider = document.querySelector('#slider-color');
     const createPies = document.querySelector('.add-pies');
     const piesList = document.querySelector('.card-list');
+
 
     noUiSlider.create(slider, {
         start: [ 20, 40, 60, 80 ],
@@ -32,8 +33,6 @@
     for ( var i = 0; i < connect.length; i++ ) {
         connect[i].classList.add(classes[i]);
     }
-
-
 
 
 
@@ -101,7 +100,6 @@
                     </button>
                     <strong>Sorry.</strong> You have already made an entry today. Please try again tomorrow.
                 </div>`;
-            console.log(alertMsg);
 
             document.querySelector('.alert').innerHTML = alertMsg;
         }
@@ -112,20 +110,71 @@
 
 
 
+    function pieChart(){
+
+        for(i=0; i<pies.length; i++) {
+
+            let CHART = document.querySelector("#pieChart" + i);
+
+            let data = {
+                labels: [
+                    "Red",
+                    "Blue",
+                    "Yellow"
+                ],
+                datasets: [
+                    {
+                        data: pies[i].pie,
+                        backgroundColor: [
+                            "#FF6384",
+                            "#36A2EB",
+                            "#FFCE56"
+                        ],
+                        hoverBackgroundColor: [
+                            "#FF6384",
+                            "#36A2EB",
+                            "#FFCE56"
+                        ]
+                    }]
+            };
+
+            let pieChart = new Chart(CHART, {
+                type: 'pie',
+                data: data,
+                options: {
+                    animation: {
+                        animateScale: false
+                    }
+                }
+            });
+        }
+    }
+
+
+
+
 
     function populateList(cards, cardList){
+
         cardList.innerHTML =  cards.map((pie, i) => {
                 return`<div class="card">
-                       <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-                       <p class="card-text" id="result">Date Created: ${pie.date}</p>
-                   </div>`;
+                           <canvas id="pieChart${i}" width="400" height="400"></canvas>
+                           <p class="card-text" id="result">Date Created: ${pie.date}</p>
+                           <button type="button" class="btn btn-secondary btn-sm" data-index="${i}">Delete</button>
+                       </div>`;
+
         }).join('');
+
+        pieChart();
     }
 
 
     createPies.addEventListener('submit', createPie);
 
     populateList(pies, piesList);
+
+
+
 
 
 
