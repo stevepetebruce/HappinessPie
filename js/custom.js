@@ -13,13 +13,13 @@
 
 
     noUiSlider.create(slider, {
-        start: [ 20, 40, 60, 80 ],
-        connect: [true, true, true, true, true],
+        start: [ 14, 28, 42, 56, 70, 85 ],
+        connect: [true, true, true, true, true, true, true],
         range: {
             'min': [ 0 ],
             'max': [ 100 ]
         },
-        margin: 10, // Handles must be at least 10 apart
+        margin: 4, // Handles must be at least 4 apart
         pips: { // Show a scale with the slider
             mode: 'steps',
             stepped: true,
@@ -28,7 +28,7 @@
     });
 
     const connect = slider.querySelectorAll('.noUi-connect');
-    const classes = ['c-1-color', 'c-2-color', 'c-3-color', 'c-4-color', 'c-5-color'];
+    const classes = ['c-1-color', 'c-2-color', 'c-3-color', 'c-4-color', 'c-5-color', 'c-3-color', 'c-4-color'];
 
     for ( var i = 0; i < connect.length; i++ ) {
         connect[i].classList.add(classes[i]);
@@ -39,7 +39,7 @@
 
     // slider update values
     slider.noUiSlider.on('update', function( values ) {
-        const keys = [ Math.round(values[0]), Math.round(values[1] - values[0]), Math.round(values[2] - values[1]), Math.round(values[3] - values[2]), Math.round(100 - values[3]) ];
+        const keys = [ Math.round(values[0]), Math.round(values[1] - values[0]), Math.round(values[2] - values[1]), Math.round(values[3] - values[2]), Math.round(values[4] - values[3]), Math.round(values[5] - values[4]), Math.round(100 - values[5]) ];
 
         const segments = document.querySelectorAll('.keys');
         for (i = 0; i < segments.length; i++) {
@@ -75,11 +75,13 @@
         const d = `${year}/${month}/${day}`;
 
         // slider range
-        pieArray[4] = Math.round(100 - pieArray[3]);
+        pieArray[6] = Math.round(100 - pieArray[5]);
+        pieArray[5] = Math.round(pieArray[5] - pieArray[4]);
+        pieArray[4] = Math.round(pieArray[4] - pieArray[3]);
         pieArray[3] = Math.round(pieArray[3] - pieArray[2]);
         pieArray[2] = Math.round(pieArray[2] - pieArray[1]);
         pieArray[1] = Math.round(pieArray[1] - pieArray[0]);
-        pieArray[0] = Math.round(100 - (pieArray[1] + pieArray[2] + pieArray[3] + pieArray[4]));
+        pieArray[0] = Math.round(100 - (pieArray[1] + pieArray[2] + pieArray[3] + pieArray[4] + pieArray[5] + pieArray[6]));
 
         const pie = {
             date: d,
@@ -143,14 +145,13 @@
                 data: data,
                 options: {
                     animation: {
-                        animateScale: false
+                        animateScale: false,
+                        animateRotate: false
                     }
                 }
             });
         }
     }
-
-
 
 
 
@@ -169,9 +170,23 @@
     }
 
 
+    function removePie(e) {
+        e.preventDefault();
+        let index = e.target.dataset.index;
+        pies.splice(index, 1);
+        localStorage.setItem("pies", JSON.stringify(pies));
+
+        populateList(pies, piesList);
+    }
+
+
     createPies.addEventListener('submit', createPie);
 
+    piesList.addEventListener('click', removePie);
+
     populateList(pies, piesList);
+
+
 
 
 
