@@ -61,7 +61,7 @@
         }
     });
 
-
+    // Create Pie Chart
     function createPie(e) {
         e.preventDefault();
         const strArray = slider.noUiSlider.get();
@@ -88,13 +88,13 @@
             pie: pieArray
         };
 
-        const lastElement = pies[pies.length - 1] || [];
+        const lastElement = pies[0] || [];
         const newDate = pie.date.valueOf();
         const lastDate = lastElement.date;
 
 
         if(newDate !== lastDate) {
-            pies.push(pie);
+            pies.unshift(pie);
         } else {
             const alertMsg = `<div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -111,11 +111,9 @@
     }
 
 
-
+    // Chart.js
     function pieChart(){
-
         for(i=0; i<pies.length; i++) {
-
             let CHART = document.querySelector("#pieChart" + i);
 
             let data = {
@@ -154,9 +152,8 @@
     }
 
 
-
+    // Display pie charts
     function populateList(cards, cardList){
-
         cardList.innerHTML =  cards.map((pie, i) => {
                 return`<div class="card">
                            <canvas id="pieChart${i}" width="400" height="400"></canvas>
@@ -169,7 +166,7 @@
         pieChart();
     }
 
-
+    // Remove pie Chart
     function removePie(e) {
         e.preventDefault();
         let index = e.target.dataset.index;
@@ -178,6 +175,23 @@
 
         populateList(pies, piesList);
     }
+
+    // Average of all pie charts
+    const average = pies.reduce(function(acc, obj, a) {
+        const len = pies.length;
+        const arraylen = obj.pie.length;
+        for (i = 0; i < arraylen; i++) {
+            acc[i] += obj.pie[i];
+        }
+        if (a === len-1) {
+            for (i = 0; i < arraylen; i++) {
+                acc[i] /= len;
+            }
+        }
+        return acc;
+    }, [0,0,0,0,0,0,0]);
+
+    console.log(average);
 
 
     createPies.addEventListener('submit', createPie);
