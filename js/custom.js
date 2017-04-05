@@ -176,7 +176,7 @@
         populateList(pies, piesList);
     }
 
-    // Average of all pie charts
+    // Calculate average of all pie charts
     const average = pies.reduce(function(acc, obj, a) {
         const len = pies.length;
         const arraylen = obj.pie.length;
@@ -191,7 +191,46 @@
         return acc;
     }, [0,0,0,0,0,0,0]);
 
-    console.log(average);
+    // Create average pie chart
+    let AVCHART = document.querySelector("#pieAverage");
+
+    let avData = {
+        labels: [
+            "Red",
+            "Blue",
+            "Yellow"
+        ],
+        datasets: [
+            {
+                data: average,
+                backgroundColor: [
+                    "#FF6384",
+                    "#36A2EB",
+                    "#FFCE56"
+                ],
+                hoverBackgroundColor: [
+                    "#FF6384",
+                    "#36A2EB",
+                    "#FFCE56"
+                ]
+            }]
+    };
+
+    new Chart(AVCHART, {
+        type: 'pie',
+        data: avData,
+        options: {
+            animation: {
+                animateScale: false,
+                animateRotate: false
+            }
+        }
+    });
+
+
+
+
+
 
 
     createPies.addEventListener('submit', createPie);
