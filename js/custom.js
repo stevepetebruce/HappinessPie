@@ -12,6 +12,7 @@
     const piesList = document.querySelector('.card-list');
 
 
+
     noUiSlider.create(slider, {
         start: [ 14, 28, 42, 56, 70, 85 ],
         connect: [true, true, true, true, true, true, true],
@@ -158,7 +159,7 @@
                 return`<div class="card">
                            <canvas id="pieChart${i}" width="400" height="400"></canvas>
                            <p class="card-text" id="result">Date Created: ${pie.date}</p>
-                           <button type="button" class="btn btn-secondary btn-sm" data-index="${i}">Delete</button>
+                           <button type="button" class="btn btn-secondary btn-sm delete-but" data-index="${i}">Delete</button>
                        </div>`;
 
         }).join('');
@@ -169,6 +170,7 @@
     // Remove pie Chart
     function removePie(e) {
         e.preventDefault();
+        if (e.target.className != 'btn btn-secondary btn-sm delete-but') return; // Event delegation
         let index = e.target.dataset.index;
         pies.splice(index, 1);
         localStorage.setItem("pies", JSON.stringify(pies));
@@ -189,7 +191,14 @@
             }
         }
         return acc;
-    }, [0,0,0,0,0,0,0]);
+    }, [0,0,0,0,0,0,0])
+        .map(function(each_element){
+        return Math.round(each_element);  // Remove decimals in Array
+    });
+
+
+
+
 
     // Create average pie chart
     let AVCHART = document.querySelector("#pieAverage");
@@ -236,6 +245,9 @@
     createPies.addEventListener('submit', createPie);
 
     piesList.addEventListener('click', removePie);
+
+
+
 
     populateList(pies, piesList);
 
