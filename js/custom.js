@@ -6,6 +6,42 @@
         return;
     }
 
+
+
+
+    // animated Logo
+    // node = animateReplace(node, 'animate');
+    function animateReplace(node, className) {
+        let clone = node.cloneNode(true);
+        clone.classList.add(className);
+        node.parentNode.replaceChild(clone, node);
+        return clone;
+    }
+
+
+    // animateClass(node, 'animate');
+    function animateClass(node, className) {
+        node.classList.remove(className);
+
+        node.classList.add(className);
+        return node;
+    }
+
+
+    let letters = document.querySelector(".logo");
+
+    letters.addEventListener("mouseover", function handler(e) {
+        letters = animateReplace(letters, "run-animation");
+        letters.addEventListener("mouseover", handler, false);
+    }, false);
+
+
+
+
+
+
+
+
     let pies = JSON.parse(localStorage.getItem('pies')) || [];
     const slider = document.querySelector('#slider-color');
     const createPies = document.querySelector('.add-pies');
@@ -29,7 +65,7 @@
     });
 
     const connect = slider.querySelectorAll('.noUi-connect');
-    const classes = ['c-1-color', 'c-2-color', 'c-3-color', 'c-4-color', 'c-5-color', 'c-3-color', 'c-4-color'];
+    const classes = ['c-1-color', 'c-2-color', 'c-3-color', 'c-4-color', 'c-5-color', 'c-6-color', 'c-7-color'];
 
     for ( var i = 0; i < connect.length; i++ ) {
         connect[i].classList.add(classes[i]);
@@ -54,7 +90,7 @@
             bubbles[i].style.height = bubbleSize + "px";
             bubbles[i].style.paddingTop = (bubbleSize / 2) -15 + "px";
 
-            if(bubbleSize > 65) {
+            if(bubbleSize > 50) {
                 bubbles[i].innerHTML = "<img src='http://simpleicon.com/wp-content/uploads/smile.svg' width='30px' height='30px'>";
             } else {
                 bubbles[i].innerHTML = "<img src='http://simpleicon.com/wp-content/uploads/sad.svg' width='30px' height='30px'>";
@@ -119,25 +155,38 @@
 
             let data = {
                 labels: [
-                    "Red",
-                    "Blue",
-                    "Yellow"
+                    "Money and finances",
+                    "Professional projects",
+                    "Friends and social ties",
+                    "Learning and growth",
+                    "Health and fitness",
+                    "Service and contribution",
+                    "Pleasure and fun"
                 ],
                 datasets: [
                     {
                         data: pies[i].pie,
                         backgroundColor: [
-                            "#FF6384",
-                            "#36A2EB",
-                            "#FFCE56"
+                            "#61BB46",
+                            "#FDB827",
+                            "#F5821F",
+                            "#E03A3E",
+                            "#963D97",
+                            "#009DDC",
+                            "#117DFF"
                         ],
                         hoverBackgroundColor: [
-                            "#FF6384",
-                            "#36A2EB",
-                            "#FFCE56"
+                            "#61BB46",
+                            "#FDB827",
+                            "#F5821F",
+                            "#E03A3E",
+                            "#963D97",
+                            "#009DDC",
+                            "#117DFF",
                         ]
                     }]
             };
+
 
             let pieChart = new Chart(CHART, {
                 type: 'pie',
@@ -146,6 +195,9 @@
                     animation: {
                         animateScale: false,
                         animateRotate: false
+                    },
+                    legend: {
+                        display: false
                     }
                 }
             });
@@ -205,22 +257,34 @@
 
     let avData = {
         labels: [
-            "Red",
-            "Blue",
-            "Yellow"
+            "Money and finances",
+            "Professional projects",
+            "Friends and social ties",
+            "Learning and growth",
+            "Health and fitness",
+            "Service and contribution",
+            "Pleasure and fun"
         ],
         datasets: [
             {
                 data: average,
                 backgroundColor: [
-                    "#FF6384",
-                    "#36A2EB",
-                    "#FFCE56"
+                    "#61BB46",
+                    "#FDB827",
+                    "#F5821F",
+                    "#E03A3E",
+                    "#963D97",
+                    "#009DDC",
+                    "#117DFF"
                 ],
                 hoverBackgroundColor: [
-                    "#FF6384",
-                    "#36A2EB",
-                    "#FFCE56"
+                    "#61BB46",
+                    "#FDB827",
+                    "#F5821F",
+                    "#E03A3E",
+                    "#963D97",
+                    "#009DDC",
+                    "#117DFF"
                 ]
             }]
     };
