@@ -144,21 +144,21 @@ footer p {
 h1 {
     font-family: 'Passion One', cursive;
     text-transform: uppercase;
-    font-size: 60px;
+    font-size: 90px;
 }
 
 @keyframes textAnim {
-    0% {font-size: 60px; }
-    10% {font-size: 70px; }
-    40% {font-size: 53px; }
-    100% {font-size: 60px; }
+    0% {font-size: 90px; }
+    10% {font-size: 100px; }
+    40% {font-size: 83px; }
+    100% {font-size: 90px; }
 }
 
 @-webkit-keyframes textAnim {
-    0% {font-size: 60px; }
-    10% {font-size: 70px; }
-    40% {font-size: 53px; }
-    100% {font-size: 60px; }
+    0% {font-size: 90px; }
+    10% {font-size: 100px; }
+    40% {font-size: 83px; }
+    100% {font-size: 90px; }
 }
 
 
@@ -168,8 +168,8 @@ h1 {
     float: left;
     position: relative;
     text-shadow: #2d343d 1px 1px, #2d343d 2px 2px, #2d343d 3px 3px, #2d343d 4px 4px, #2d343d 5px 5px, #2d343d 6px 6px;
-    animation: textAnim 1.5s ease;
-    -webkit-animation: textAnim 1.5s ease;
+    animation: textAnim 1.2s ease;
+    -webkit-animation: textAnim 1.2s ease;
 }
 
 .run-animation{
