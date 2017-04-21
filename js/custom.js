@@ -35,7 +35,7 @@
   const slider = document.querySelector('#slider-color');
   const createPies = document.querySelector('.add-pies');
   const piesList = document.querySelector('.card-list');
-  const removeBut = document.querySelector('.average-sub')
+  const avBut = document.querySelector('.average-but');
 
 
   noUiSlider.create(slider, {
@@ -77,9 +77,9 @@
       bubbles[i].style.paddingTop = `${(bubbleSize / 2) - 15}px`;
 
       if (bubbleSize > 50) {
-        bubbles[i].innerHTML = "<img src='http://simpleicon.com/wp-content/uploads/smile.svg' width='30px' height='30px'>";
+        bubbles[i].innerHTML = "<img src='img/happy.svg' width='30px' height='30px'>";
       } else {
-        bubbles[i].innerHTML = "<img src='http://simpleicon.com/wp-content/uploads/sad.svg' width='30px' height='30px'>";
+        bubbles[i].innerHTML = "<img src='img/sad.svg' width='30px' height='30px'>";
       }
     }
   });
@@ -193,12 +193,12 @@
     // Display pie charts
   function populateList(cards, cardList) {
     cardList.innerHTML = cards.map((pie, i) => `<div class="card">
-                           <canvas id="pieChart${i}" width="400" height="400"></canvas>
+                           <canvas id="pieChart${i}" width="200" height="200"></canvas>
                            <p class="card-text" id="result">Date Created: ${pie.date}</p>
                            <button type="button" class="btn btn-secondary btn-sm delete-but" data-index="${i}">Delete</button>
                        </div>`).join('');
 
-    cards.length < 2 ? removeBut.style.visibility = 'hidden' : removeBut.style.visibility = 'visible'; // hide average button if less than 2 pies
+    cards.length < 2 ? avBut.style.visibility = 'hidden' : avBut.style.visibility = 'visible'; // hide average button if less than 2 pies
 
     pieChart();
   }
@@ -215,73 +215,75 @@
   }
 
     // Calculate average of all pie charts
-  const average = pies.reduce((acc, obj, a) => {
-    const len = pies.length;
-    const arraylen = obj.pie.length;
-    for (let i = 0; i < arraylen; i++) {
-      acc[i] += obj.pie[i];
-    }
-    if (a === len - 1) {
+  function averagePie() {
+    const average = pies.reduce((acc, obj, a) => {
+      const len = pies.length;
+      const arraylen = obj.pie.length;
       for (let i = 0; i < arraylen; i++) {
-        acc[i] /= len;
+        acc[i] += obj.pie[i];
       }
-    }
-    return acc;
-  }, [0, 0, 0, 0, 0, 0, 0]).map(eachElement => Math.round(eachElement));
+      if (a === len - 1) {
+        for (let i = 0; i < arraylen; i++) {
+          acc[i] /= len;
+        }
+      }
+      return acc;
+    }, [0, 0, 0, 0, 0, 0, 0]).map(eachElement => Math.round(eachElement));
 
+    // Create average pie chart
+    const AVCHART = document.querySelector('#pieAverage');
 
-  // Create average pie chart
-  const AVCHART = document.querySelector('#pieAverage');
+    const avData = {
+      labels: [
+        'Money and finances',
+        'Professional projects',
+        'Friends and social ties',
+        'Learning and growth',
+        'Health and fitness',
+        'Service and contribution',
+        'Pleasure and fun',
+      ],
+      datasets: [
+        {
+          data: average,
+          backgroundColor: [
+            colours.money,
+            colours.projects,
+            colours.friends,
+            colours.learning,
+            colours.health,
+            colours.service,
+            colours.pleasure
+          ],
+          hoverBackgroundColor: [
+            colours.money,
+            colours.projects,
+            colours.friends,
+            colours.learning,
+            colours.health,
+            colours.service,
+            colours.pleasure
+          ],
+        }],
+    };
 
-  const avData = {
-    labels: [
-      'Money and finances',
-      'Professional projects',
-      'Friends and social ties',
-      'Learning and growth',
-      'Health and fitness',
-      'Service and contribution',
-      'Pleasure and fun',
-    ],
-    datasets: [
-      {
-        data: average,
-        backgroundColor: [
-          colours.money,
-          colours.projects,
-          colours.friends,
-          colours.learning,
-          colours.health,
-          colours.service,
-          colours.pleasure
-        ],
-        hoverBackgroundColor: [
-          colours.money,
-          colours.projects,
-          colours.friends,
-          colours.learning,
-          colours.health,
-          colours.service,
-          colours.pleasure
-        ],
-      }],
-  };
-
-  new Chart(AVCHART, {
-    type: 'pie',
-    data: avData,
-    options: {
-      animation: {
-        animateScale: false,
-        animateRotate: false,
+    new Chart(AVCHART, {
+      type: 'pie',
+      data: avData,
+      options: {
+        animation: {
+          animateScale: false,
+          animateRotate: false,
+        },
       },
-    },
-  });
-
+    });
+  }
 
   createPies.addEventListener('submit', createPie);
 
   piesList.addEventListener('click', removePie);
+
+  avBut.addEventListener('click', averagePie);
 
 
   populateList(pies, piesList);

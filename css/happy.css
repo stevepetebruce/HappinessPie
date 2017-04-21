@@ -105,8 +105,8 @@ body {
 .card {
     float: left;
     width: 25%;
-    padding: .75rem;
-    margin-bottom: 2rem;
+    padding: 0.5rem 3rem 3rem 3rem;
+    margin: 1rem;
     border: 0;
 }
 
