@@ -1,5 +1,5 @@
-(function (win, doc) {
-  if (!doc.querySelector || !win.addEventListener) {
+(function (window, document) {
+  if (!document.querySelector || !window.addEventListener) {
     return;
   }
 
@@ -15,7 +15,7 @@
 
   let letters = document.querySelector('.logo');
 
-  letters.addEventListener('mouseover', function handler(e) {
+  letters.addEventListener('mouseover', function handler() {
     letters = animateReplace(letters, 'run-animation');
     letters.addEventListener('mouseover', handler, false);
   }, false);
@@ -192,7 +192,7 @@
 
     // Display pie charts
   function populateList(cards, cardList) {
-    cardList.innerHTML = cards.map((pie, i) => `<div class="card">
+    cardList.innerHTML = cards.map((pie, i) => `<div class="col-lg-6 col-md-6 col-lg-4 col-xl-3 card">
                            <canvas id="pieChart${i}" width="200" height="200"></canvas>
                            <p class="card-text" id="result">Date Created: ${pie.date}</p>
                            <button type="button" class="btn btn-secondary btn-sm delete-but" data-index="${i}">Delete</button>

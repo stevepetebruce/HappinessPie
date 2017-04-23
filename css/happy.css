@@ -104,7 +104,6 @@ body {
 
 .card {
     float: left;
-    width: 25%;
     padding: 0.5rem 3rem 3rem 3rem;
     margin: 1rem;
     border: 0;
@@ -141,10 +140,20 @@ footer p {
 
 /* Happiness Pie Logo */
 
-h1 {
+h1, h2, h3 {
     font-family: 'Passion One', cursive;
     text-transform: uppercase;
+
+}
+
+h1 {
     font-size: 90px;
+}
+
+h2 {
+    font-size: 55px;
+    display: inline-block;
+    margin: 0 auto;
 }
 
 @keyframes textAnim {
@@ -167,9 +176,17 @@ h1 {
     display: block;
     float: left;
     position: relative;
-    text-shadow: #2d343d 1px 1px, #2d343d 2px 2px, #2d343d 3px 3px, #2d343d 4px 4px, #2d343d 5px 5px, #2d343d 6px 6px;
+    text-shadow: #2d343d 5px 5px;
     animation: textAnim 1.2s ease;
     -webkit-animation: textAnim 1.2s ease;
+}
+
+.subtitle {
+    transform: translateX(-50%) ;
+    display: block;
+    float: left;
+    position: relative;
+    text-shadow: #2d343d 3px 3px;
 }
 
 .run-animation{
@@ -177,7 +194,7 @@ h1 {
     -webkit-animation: textAnim;
 }
 
-.title:nth-child(1) {
+.subtitle:nth-child(1), .title:nth-child(1) {
     color: #61BB46;
     /* Safari */
     -webkit-transform: rotate(-2deg);
@@ -191,7 +208,7 @@ h1 {
     -webkit-animation-delay: .1s;
 }
 
-.title:nth-child(2) {
+.subtitle:nth-child(2), .title:nth-child(2) {
     color: #FDB827;
     /* Safari */
     -webkit-transform: rotate(3deg);
@@ -204,7 +221,7 @@ h1 {
     animation-delay: .2s;
     -webkit-animation-delay: .2s;
 }
-.title:nth-child(3) {
+.subtitle:nth-child(3), .title:nth-child(3) {
     color: #F5821F;
     /* Safari */
     -webkit-transform: rotate(-3deg);
@@ -217,7 +234,7 @@ h1 {
     animation-delay: .3s;
     -webkit-animation-delay: .3s;
 }
-.title:nth-child(4) {
+.subtitle:nth-child(4), .title:nth-child(4) {
     color: #E03A3E;
     /* Safari */
     -webkit-transform: rotate(4deg);
@@ -230,7 +247,7 @@ h1 {
     animation-delay: .3s;
     -webkit-animation-delay: .3s;
 }
-.title:nth-child(5) {
+.subtitle:nth-child(5), .title:nth-child(5) {
     color: #963D97;
     /* Safari */
     -webkit-transform: rotate(-3deg);
@@ -243,7 +260,7 @@ h1 {
     animation-delay: .4s;
     -webkit-animation-delay: .4s;
 }
-.title:nth-child(6) {
+.subtitle:nth-child(6), .title:nth-child(6) {
     color: #009DDC;
     /* Safari */
     -webkit-transform: rotate(6deg);
@@ -256,7 +273,7 @@ h1 {
     animation-delay: .5s;
     -webkit-animation-delay: .5s;
 }
-.title:nth-child(7) {
+.subtitle:nth-child(7), .title:nth-child(7) {
     color: #117DFF;
     /* Safari */
     -webkit-transform: rotate(-3deg);
@@ -269,7 +286,7 @@ h1 {
     animation-delay: .6s;
     -webkit-animation-delay: .6s;
 }
-.title:nth-child(8) {
+.subtitle:nth-child(8), .title:nth-child(8) {
     color: #61BB46;
     /* Safari */
     -webkit-transform: rotate(-1deg);
@@ -282,7 +299,7 @@ h1 {
     animation-delay: .7s;
     -webkit-animation-delay: .7s;
 }
-.title:nth-child(9) {
+.subtitle:nth-child(9), .title:nth-child(9) {
     color: #FDB827;
     /* Safari */
     -webkit-transform: rotate(4deg);
@@ -297,7 +314,7 @@ h1 {
 }
 
 
-.title:nth-child(11) {
+.subtitle:nth-child(11), .title:nth-child(11) {
     color: #F5821F;
     /* Safari */
     -webkit-transform: rotate(4deg);
@@ -310,7 +327,7 @@ h1 {
     animation-delay: .9s;
     -webkit-animation-delay: .9s;
 }
-.title:nth-child(12) {
+.subtitle:nth-child(12), .title:nth-child(12) {
     color: #E03A3E;
     /* Safari */
     -webkit-transform: rotate(-4deg);
@@ -323,7 +340,7 @@ h1 {
     animation-delay: 1s;
     -webkit-animation-delay: 1s;
 }
-.title:nth-child(13) {
+.subtitle:nth-child(13), .title:nth-child(13) {
     color: #963D97;
     /* Safari */
     -webkit-transform: rotate(1deg);
