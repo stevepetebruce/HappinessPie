@@ -11,7 +11,7 @@
     clone.classList.add(className);
     node.parentNode.replaceChild(clone, node);
     return clone;
-  };
+  }
 
   let letters = document.querySelector('.logo');
 
@@ -95,7 +95,7 @@
     const month = dateObj.getMonth() + 1; // months from 1-12
     const day = dateObj.getDate();
     const year = dateObj.getFullYear();
-    const d = `${year}/${month}/${day}`;
+    const d = `${day}/${month}/${year}`;
 
         // slider range
     pieArray[6] = Math.round(100 - pieArray[5]);
@@ -115,7 +115,7 @@
     const newDate = pie.date.valueOf();
     const lastDate = lastElement.date;
 
-    // Chect if two inputs in one day
+    // Check if two inputs in one day
     if (newDate !== lastDate) {
       pies.unshift(pie);
     } else {
@@ -194,7 +194,7 @@
   function populateList(cards, cardList) {
     cardList.innerHTML = cards.map((pie, i) => `<div class="col-lg-6 col-md-6 col-lg-4 col-xl-3 card">
                            <canvas id="pieChart${i}" width="200" height="200"></canvas>
-                           <p class="card-text" id="result">Date Created: ${pie.date}</p>
+                           <p class="card-text" id="result">Pie Created: ${pie.date}</p>
                            <button type="button" class="btn btn-secondary btn-sm delete-but" data-index="${i}">Delete</button>
                        </div>`).join('');
 
